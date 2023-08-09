@@ -21,7 +21,7 @@ class UserService {
   // @Getters
 
   public loadAll(): IUser[] {
-    return this.jsonService.readField<DB>('users', dbSchema) || []
+    return this.jsonService.read<DB>(dbSchema)?.users || []
   }
 
   public findById(id: number) {
@@ -46,14 +46,18 @@ class UserService {
       throw new ApiError(400, error)
     }
 
+    const id = users.length + 1
+
     const update = [...users, {
-      id: users.length + 1,
+      id,
       name: obj.name,
       login: obj.login,
       created: getMySqlDate()
     }]
 
     this.save(update)
+
+    return id
   }
 
   // TODO: Доработать, убрать правку логина и накинуть необязательность всех данных
@@ -78,6 +82,11 @@ class UserService {
   public removeItem(id: number) {
     const filter = this.loadAll().filter(it => it.id !== id)
     this.save(filter)
+  }
+
+  public getAllPostsByUserId(userId: number) {
+    const posts = this.jsonService.read<DB>(dbSchema)?.posts || []
+    return posts.filter(it => it.user_id === userId)
   }
 }
 

@@ -13,4 +13,6 @@ userRouter.post('/', checkContentType('application/json', true), validateJsonBod
 userRouter.put('/', checkContentType('application/json', true), validateJsonBody(updateSchema), controller.updateOne)
 userRouter.delete('/:id', checkIdParam, controller.deleteOne)
 
+userRouter.get('/:id/posts', checkIdParam, controller.getUserPosts)
+
 export default userRouter

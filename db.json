@@ -2,10 +2,19 @@
   "users": [
     {
       "id": 1,
-      "name": "Alexander Antonov",
       "login": "awenn2015",
+      "name": "Alexander Antonov",
       "created": "2023-08-07 23:54:00"
     }
   ],
-  "posts": []
+  "posts": [
+    {
+      "id": 1,
+      "title": "Hello World!",
+      "content": "This is content for awesome post!",
+      "created": "2023-08-09 06:49:00",
+      "modified": "2023-08-09 06:49:00",
+      "user_id": 1
+    }
+  ]
 }

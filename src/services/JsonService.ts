@@ -37,7 +37,7 @@ class JsonService {
     }
   }
 
-  public readField<T extends Record<string, any>>(key: keyof T, jsonSchema?: Joi.ObjectSchema<T>) {
+  public readField<T extends Record<string, any>, K extends keyof T = keyof T>(key: K, jsonSchema?: Joi.ObjectSchema<T>) {
     return this.read<T>(jsonSchema)?.[key] || null
   }
 

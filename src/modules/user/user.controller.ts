@@ -38,13 +38,13 @@ class UserController {
     const { name, login } = req.body as Omit<IUser, 'id'>
 
     try {
-      userService.createItem({ name, login })
+      const id = userService.createItem({ name, login })
+
+      const message = 'Новый пользователь был успешно создан!'
+      return res.status(201).json({ message, id })
     } catch (e) {
       return UserController.defaultError(res, e as ApiError)
     }
-
-    const message = 'Новый пользователь был успешно создан!'
-    return res.status(201).json({ message })
   }
 
   public static updateOne(req: Request, res: Response) {
@@ -71,6 +71,13 @@ class UserController {
 
     const message = 'Пользователь был успешно удален!'
     return res.json({ message })
+  }
+
+  public static getUserPosts(req: Request, res: Response) {
+    const userId = req.params['id']!
+    const posts = userService.getAllPostsByUserId(+userId)
+
+    return res.json(posts)
   }
 }
 
