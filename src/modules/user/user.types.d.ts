@@ -16,5 +16,5 @@ export interface IPost {
 
 export interface DB {
   users: IUser[],
-  posts: any[]
+  posts: IPost[]
 }

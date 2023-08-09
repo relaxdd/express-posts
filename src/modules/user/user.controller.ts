@@ -79,6 +79,16 @@ class UserController {
 
     return res.json(posts)
   }
+
+  public static getUserPostById(req: Request, res: Response) {
+    const userId = req.params['id']!
+    const postId = req.params['postId']!
+
+    const posts = userService.getAllPostsByUserId(+userId)
+    const post = posts.find(it => it.id === +postId)
+
+    return res.json(post)
+  }
 }
 
 export default UserController

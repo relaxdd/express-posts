@@ -1,7 +1,7 @@
 import path from 'path'
 import { __abs_path } from '../../defines'
 import JsonService from '../../services/JsonService'
-import { DB, IUser } from './user.types'
+import { DB, IPost, IUser } from './user.types'
 import { getMySqlDate } from '../../utils'
 import ApiError from '../../utils/errors/ApiError'
 import { dbSchema } from './user.schemas'
@@ -84,7 +84,7 @@ class UserService {
     this.save(filter)
   }
 
-  public getAllPostsByUserId(userId: number) {
+  public getAllPostsByUserId(userId: number): IPost[] {
     const posts = this.jsonService.read<DB>(dbSchema)?.posts || []
     return posts.filter(it => it.user_id === userId)
   }
